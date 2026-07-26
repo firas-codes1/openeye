@@ -4,51 +4,67 @@ from tkinter import *
 from tkinter.messagebox import showerror, showwarning, showinfo
 
 def CreateWindow():
-	#returns: root_win, root
-	root_win=tk.Tk()
-	root_win.title("OpenEye v3")
-	root_win.geometry('750x245+450+200')
-	try:
-	    root_win.iconbitmap('.\openeye.ico')
-	except:
- 	    print("couldnt load icon (openeye.ico) from CWD")
-    
-	root_win.resizable(False,False)
-	style = ttk.Style(root_win)
-	style.theme_use("xpnative")
+        #returns: root_win, root
+        root_win=tk.Tk()
+        root_win.title("OpenEye v3")
+        root_win.geometry('750x245+450+200')
+        try:
+            root_win.iconbitmap('.\openeye.ico')
+        except:
+            print("couldnt load icon (openeye.ico) from CWD")
 
-	#Frames
-	root=ttk.Frame(root_win,height=250,width=725)
-	root.place(x=0,y=0)
+        root_win.resizable(False,False)
+        style = ttk.Style(root_win)
+        style.theme_use("xpnative")
+
+        #Frames
+        root=ttk.Frame(root_win,height=250,width=755)
+        root.place(x=0,y=0)
+
+        #Font sets
+        fontset1=("Arial",8,"bold")
+        fontset2=("Arial",6,"bold")
+        fontset3=("Arial",16)
+        fontset4=("Arial",16,"bold")
+        fontset5=("Arial",10,"bold")
+
+        #Main text
+        lbl1= tk.Label(root, text="Router: ",font = fontset3)
+        lbl2= tk.Label(root, text="Internet: ",font = fontset3)
+
+        onlbl= tk.Label(root, text="ON")
+        onlbl2= tk.Label(root, text="ON")
+        onlbl.configure(font = fontset4,fg="green")
+        onlbl2.configure(font = fontset4,fg="green")
+
+        timelbl=tk.Label(root,text="Speed: ",font = fontset3)
+        fsl=tk.Label(root,text="Mbps",font = fontset3)
+
+        #grid labels
+        lbl1.place(x=5, y=30)
+        lbl2.place(x=5, y=60)
+        timelbl.place(x=5,y=2)
+
+        #Megabits axis
+        Mb9=tk.Label(root,text="9",font = fontset1)
+        Mb7=tk.Label(root,text="7",font = fontset1)
+        Mb5=tk.Label(root,text="5",font = fontset1)
+        Mb3=tk.Label(root,text="3",font = fontset1)
+        Mb1=tk.Label(root,text="1",font = fontset1)
+        Mblbl=tk.Label(root,text="Mbps",font = fontset2)
+
+        #Difference between each line is 15 pixels * 2 (since each megabit maps to 15 pixels)        Mb1.place(x=7,y=90+(15))
+        Mb9.place(x=18,y=95)
+        Mb7.place(x=18,y=125)
+        Mb5.place(x=18,y=155)
+        Mb3.place(x=18,y=185)
+        Mb1.place(x=18,y=215)
+        Mblbl.place(x=5,y=230)
+
+        fsl.place(x=220,y=2)
 
 
-	#Font sets
-	fontset4=("Arial",16,"bold")
-	fontset3=("Arial",16)
-	#fontset2=("Arial",14,"bold")
-	fontset5=("Arial",10,"bold")
-
-	#Main text
-	lbl1= tk.Label(root, text="Router: ",font = fontset3)
-	lbl2= tk.Label(root, text="Internet: ",font = fontset3)
-
-	onlbl= tk.Label(root, text="ON")
-	onlbl2= tk.Label(root, text="ON")
-	onlbl.configure(font = fontset4,fg="green")
-	onlbl2.configure(font = fontset4,fg="green")
-
-	timelbl=tk.Label(root,text="Speed: ",font = fontset3)
-	fsl=tk.Label(root,text="Mbps",font = fontset3)
-
-	#grid labels
-	lbl1.place(x=5, y=30)
-	lbl2.place(x=5, y=60)
-	timelbl.place(x=5,y=2)
-
-	fsl.place(x=220,y=2)
-
-
-	return root_win,root,fontset3,fontset4,fontset5
+        return root_win,root,fontset3,fontset4,fontset5
 
 
 
@@ -72,22 +88,24 @@ class CreateCanvas:
                 self.ScrollBar=ttk.Scrollbar(root,orient='vertical',command=self.s_viewall)#(textbx.yview , textbx2.yview))
         
         def PlaceAll(self):
+                #Canvas1 (for network speed visualization)
                 self.canvas1.create_rectangle(0,150,420,0,width=0,fill="white")
-                self.canvas1.place(x=5,y=90)
+                self.canvas1.place(x=35,y=90) #x=5
+
                 self.DrawGridCanvas()
                 self.canvas2.create_line(0, #x1
                     0, #y1
                     1, #x2
                     245#y2
                     , width=0.5,fill="black")
-                self.canvas2.place(x=400,y=1)
+                self.canvas2.place(x=430,y=1) #x=400
 
 
-                self.Devices.place(x=474,y=4) #used to be condevs
+                self.Devices.place(x=504,y=4) #used to be condevs, x=474
 
                 self.TextBox.configure(yscrollcommand=self.ScrollBar.set)
                 self.TextBox2.configure(yscrollcommand=self.ScrollBar.set)
-                self.ScrollBar.place(x=710,y=30,height=212)
+                self.ScrollBar.place(x=730,y=30,height=212) #x=710
 
                 #self.speedlbl.place(x=160,y=2)
                 self.speedlbl.place(x=80,y=2)
@@ -110,10 +128,10 @@ class CreateCanvas:
                 self.TextBox2.insert(tk.END, MAClist)
 
                 self.TextBox.configure(state="disable")
-                self.TextBox.place(x=410,y=30)
+                self.TextBox.place(x=440,y=30) #x=410
 
                 self.TextBox2.configure(state="disable")
-                self.TextBox2.place(x=560,y=30)
+                self.TextBox2.place(x=590,y=30) #x=560
 
         def PlaceSpeed(self,speed):
                 self.speedlbl.configure(text=str(float(f'{speed:.2f}')))
@@ -131,13 +149,13 @@ class CreateCanvas:
                         pass
 
                 self.canvas1.create_line(x, y, x,y-3 , width=4,fill="green")
-                self.canvas1.place(x=5,y=90)
+                self.canvas1.place(x=35,y=90) #x=5
 
         def RenewCanvas(self):
                 #Redraw Canvas1 when it is full (for network speed visualization)
                 self.canvas1 = Canvas(self.root,highlightthickness=1, highlightbackground="black",width=390,height=150)
                 self.canvas1.create_rectangle(0,150,420,0,width=0,fill="white")
-                self.canvas1.place(x=5,y=90)
+                self.canvas1.place(x=35,y=90) #x=5
                 self.DrawGridCanvas()
 
         def DrawGridCanvas(self):
@@ -147,7 +165,7 @@ class CreateCanvas:
                 self.canvas1.create_line(0, 150-(15*5), 390,150-(15*5), width=0.1,fill="black")
                 self.canvas1.create_line(0, 150-(15*7), 390,150-(15*7), width=0.1,fill="black")
                 self.canvas1.create_line(0, 150-(15*9), 390,150-(15*9), width=0.1,fill="black")
-                self.canvas1.place(x=5,y=90)
+                self.canvas1.place(x=35,y=90) #x=5
 
 
                 
