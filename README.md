@@ -10,7 +10,7 @@ OpenEyev3 utilizes a method similar to that of SNMP: polling devices at fixed in
 
 
 ## Libraries used
--<b>netifaces<b> library is used to get the user's own IP, the gateway, and the netmask. 
+-<b>netifaces</b> library is used to get the user's own IP, the gateway, and the netmask. 
 
 -<b>Scapy</b> is used to craft ARP and ICMP packets. 
 
