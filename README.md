@@ -14,7 +14,7 @@ OpenEyev3 utilizes a method similar to that of SNMP: polling devices at fixed in
 
 -<b>Scapy</b> is used to craft ARP and ICMP packets. 
 
--<b>Tkinter</b> is used for the GUI.
+-<b>Tkinter</b> is used for the GUI and visualization.
 
 
 ## Future improvements
